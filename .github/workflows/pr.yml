@@ -4,7 +4,7 @@ on:
   
 jobs:
   gha-custom-hook:
-    runs-on: ubuntu-latest
+    runs-on: arc1
     steps:
      - run: "ls"
      - run: "env"
