@@ -7,3 +7,4 @@ jobs:
     runs-on: arc1
     steps:
      - run: "ls"
+     - run: "env"
