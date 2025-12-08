@@ -3,8 +3,16 @@ on:
   pull_request_target:
   workflow_dispatch:
   
+permissions:
+  contents: read
+
 jobs:
   summerwind-custom-hook:
     runs-on: self-hosted
     steps:
+     - name: Harden the runner (Audit all outbound calls)
+       uses: step-security/harden-runner@df199fb7be9f65074067a9eb93f12bb4c5547cf2 # v2.13.3
+       with:
+         egress-policy: audit
+
      - run: "ls"

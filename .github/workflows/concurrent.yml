@@ -3,6 +3,9 @@ name: Pull Request Workflow with Concurrency
 on: 
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   sleep-job:
     runs-on: self-hosted
@@ -10,8 +13,13 @@ jobs:
       group: pull-request-workflow-${{ github.ref }}
       cancel-in-progress: true
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@df199fb7be9f65074067a9eb93f12bb4c5547cf2 # v2.13.3
+        with:
+          egress-policy: audit
+
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
 
       - name: Sleep for 5 minutes
         run: sleep 300
