@@ -1,8 +1,16 @@
 name: Approval Hook GHA
 on:
   workflow_dispatch:
+permissions:
+  contents: read
+
 jobs:
   gha-custom-hook:
     runs-on: arc1
     steps:
+     - name: Harden the runner (Audit all outbound calls)
+       uses: step-security/harden-runner@df199fb7be9f65074067a9eb93f12bb4c5547cf2 # v2.13.3
+       with:
+         egress-policy: audit
+
      - run: "ls"
